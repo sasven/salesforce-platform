@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Salesforce Platform | Veolia North America</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  /* Veolia North America — exact brand colors */
+  --ve-cyan:       #05c3dd;
+  --ve-cyan-dark:  #0084d7;
+  --ve-cyan-light: #e0f8fb;
+  --ve-turquoise:  #76dae8;
+  --ve-green:      #438d42;
+  --ve-blue:       #0679cc;
+  --ve-dark:       #191919;
+  --ve-gray:       #333;
+  --ve-mid:        #666;
+  --ve-light:      #f2f2f2;
+  --ve-offwhite:   #fcfcfc;
+  --ve-border:     #e5e5e5;
+  --ve-white:      #ffffff;
+  /* Salesforce */
+  --sf-blue:       #0070d2;
+  --sf-dark:       #032d60;
+  --radius:        4px;
+  --radius-lg:     8px;
+  --shadow:        0 4px 20px rgba(25,25,25,.12);
+  --shadow-sm:     0 2px 8px rgba(25,25,25,.07);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans',Arial,Helvetica,sans-serif;color:var(--ve-dark);background:var(--ve-white);line-height:1.65;font-size:16px;}
+
+/* ── TOP BAR ─────────────────────────────── */
+.topbar{background:var(--ve-dark);padding:.4rem 2rem;display:flex;justify-content:flex-end;align-items:center;gap:1.5rem;}
+.topbar a{color:rgba(255,255,255,.65);font-size:.75rem;text-decoration:none;transition:color .15s;}
+.topbar a:hover{color:var(--ve-cyan);}
+.topbar-sep{color:rgba(255,255,255,.2);font-size:.65rem;}
+
+/* ── HEADER ─────────────────────────────── */
+header{
+  position:sticky;top:0;z-index:1000;
+  background:var(--ve-white);
+  border-bottom:3px solid var(--ve-cyan);
+  box-shadow:0 2px 10px rgba(25,25,25,.1);
+  padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:75px;
+}
+
+/* ── VEOLIA LOGO (matches veolianorthamerica.com) ── */
+.veolia-logo-wrap{
+  display:flex;align-items:center;text-decoration:none;
+  background:var(--ve-white);border-radius:25px;padding:8px 16px;
+  border:1.5px solid var(--ve-border);gap:.75rem;
+  transition:border-color .2s;
+}
+.veolia-logo-wrap:hover{border-color:var(--ve-cyan);}
+/* Veolia wordmark SVG — replicates the actual veolianorthamerica.com logo style */
+.veolia-svg-mark{width:110px;height:32px;}
+/* Salesforce logo */
+.sf-logo-wrap{
+  display:flex;align-items:center;gap:.75rem;
+  padding-left:1.5rem;border-left:1px solid var(--ve-border);
+}
+.sf-logo-wrap svg{width:32px;height:32px;}
+
+.header-right{display:flex;align-items:center;gap:1rem;}
+nav{display:flex;align-items:center;gap:0;}
+nav a{
+  text-decoration:none;color:var(--ve-gray);
+  font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.6px;
+  padding:.5rem .85rem;position:relative;transition:color .15s;white-space:nowrap;
+}
+nav a::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;
+  height:3px;background:var(--ve-cyan);transform:scaleX(0);transition:transform .2s;
+}
+nav a:hover,nav a.active{color:var(--ve-dark);}
+nav a:hover::after,nav a.active::after{transform:scaleX(1);}
+.nav-cta{
+  background:var(--ve-cyan)!important;color:var(--ve-white)!important;
+  border-radius:var(--radius);padding:.5rem 1.1rem!important;
+  margin-left:.5rem;border:2px solid var(--ve-cyan)!important;
+}
+.nav-cta::after{display:none!important;}
+.nav-cta:hover{background:var(--ve-cyan-dark)!important;border-color:var(--ve-cyan-dark)!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ve-dark);border-radius:2px;}
+
+/* ── HERO ───────────────────────────────── */
+#home{
+  background:var(--ve-dark);padding:110px 2rem 80px;
+  position:relative;overflow:hidden;
+}
+#home::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(135deg,rgba(5,195,221,.15) 0%,transparent 60%);
+  pointer-events:none;
+}
+/* Veolia-style decorative circles */
+#home::after{
+  content:'';position:absolute;
+  right:-120px;top:-120px;
+  width:480px;height:480px;border-radius:50%;
+  border:60px solid rgba(5,195,221,.07);
+  pointer-events:none;
+}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1;}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(5,195,221,.15);border:1px solid rgba(5,195,221,.3);
+  color:var(--ve-cyan);border-radius:2px;
+  padding:.3rem .85rem;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:1.5rem;
+}
+.hero-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--ve-cyan);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+#home h1{
+  font-size:2.7rem;font-weight:800;color:var(--ve-white);
+  line-height:1.15;margin-bottom:1.25rem;
+}
+#home h1 span{color:var(--ve-cyan);}
+.hero-desc{color:rgba(255,255,255,.7);font-size:.95rem;line-height:1.75;margin-bottom:2rem;max-width:480px;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.7rem 1.6rem;border-radius:var(--radius);
+  font-size:.75rem;font-weight:700;cursor:pointer;
+  border:2px solid transparent;text-decoration:none;
+  font-family:inherit;text-transform:uppercase;letter-spacing:.7px;
+  transition:all .18s;
+}
+.btn-cyan{background:var(--ve-cyan);color:var(--ve-white);border-color:var(--ve-cyan);}
+.btn-cyan:hover{background:var(--ve-cyan-dark);border-color:var(--ve-cyan-dark);}
+.btn-outline{background:transparent;color:var(--ve-white);border-color:rgba(255,255,255,.45);}
+.btn-outline:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.8);}
+.hero-right{display:flex;flex-direction:column;gap:1rem;}
+.hstat{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius-lg);padding:1.1rem 1.35rem;
+  display:flex;align-items:center;gap:1.1rem;
+  border-left:3px solid var(--ve-cyan);
+}
+.hstat-icon{font-size:1.4rem;width:44px;height:44px;background:rgba(5,195,221,.15);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.hstat-val{font-size:1.6rem;font-weight:800;color:var(--ve-white);line-height:1;}
+.hstat-lbl{font-size:.72rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.6px;margin-top:.2rem;}
+
+/* ── SECTION BASE ───────────────────────── */
+section{padding:80px 2rem;}
+section:nth-child(even){background:var(--ve-light);}
+.container{max-width:1100px;margin:0 auto;}
+.section-header{margin-bottom:3rem;}
+.section-tag{
+  display:inline-block;
+  border-left:3px solid var(--ve-cyan);padding-left:.7rem;
+  color:var(--ve-cyan);font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.65rem;
+}
+.section-header h2{font-size:1.9rem;font-weight:800;color:var(--ve-dark);margin-bottom:.65rem;}
+.section-header p{color:var(--ve-mid);font-size:.9rem;max-width:550px;line-height:1.7;}
+
+/* ── RELEASE CARDS ──────────────────────── */
+.releases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+.release-card{background:var(--ve-white);border:1px solid var(--ve-border);border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow .2s,transform .2s;}
+.release-card:hover{box-shadow:var(--shadow);transform:translateY(-3px);}
+.release-header{padding:1.25rem 1.5rem;position:relative;overflow:hidden;}
+.release-header.r1{background:var(--ve-dark);}
+.release-header.r2{background:var(--ve-cyan-dark);}
+.release-header.r3{background:#2c4a6e;}
+.release-header::after{content:'';position:absolute;bottom:-20px;right:-20px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.06);}
+.release-header h3{color:#fff;font-size:.95rem;font-weight:700;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.4px;}
+.release-header .rdate{color:rgba(255,255,255,.65);font-size:.75rem;}
+.release-body{padding:1.25rem 1.5rem;}
+.release-meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;}
+.tag{display:inline-block;padding:.18rem .6rem;border-radius:2px;font-size:.68rem;font-weight:700;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px;}
+.tag-success{background:#d4f0d4;color:#2a6e2a;}
+.tag-warn{background:#fff3cc;color:#7a5200;}
+.tag-info{background:var(--ve-cyan-light);color:#006a80;}
+.tag-neutral{background:#ebebeb;color:#444;}
+.progress-bar{height:3px;background:var(--ve-border);border-radius:2px;overflow:hidden;margin:.75rem 0 .3rem;}
+.progress-fill{height:100%;border-radius:2px;}
+.pf-1{background:var(--ve-cyan);}
+.pf-2{background:var(--ve-cyan-dark);}
+.pf-3{background:#999;}
+.progress-label{display:flex;justify-content:space-between;font-size:.7rem;color:var(--ve-mid);font-weight:600;}
+.release-features{list-style:none;margin-top:.85rem;display:flex;flex-direction:column;gap:.4rem;}
+.release-features li{display:flex;align-items:center;gap:.6rem;font-size:.83rem;color:var(--ve-dark);}
+.release-features li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ve-cyan);flex-shrink:0;}
+.release-features li.planned::before{background:transparent;border:1.5px solid #bbb;}
+
+/* ── FEATURES ───────────────────────────── */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--ve-border);margin-bottom:2rem;overflow-x:auto;}
+.tab-btn{
+  padding:.65rem 1.35rem;border:none;background:none;
+  font-size:.72rem;font-weight:700;color:var(--ve-mid);cursor:pointer;
+  text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;
+  font-family:inherit;position:relative;transition:color .15s;
+}
+.tab-btn::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;background:var(--ve-cyan);transform:scaleX(0);transition:transform .2s;}
+.tab-btn:hover{color:var(--ve-dark);}
+.tab-btn.active{color:var(--ve-dark);}
+.tab-btn.active::after{transform:scaleX(1);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;}
+.feature-card{
+  padding:1.5rem;border:1px solid var(--ve-border);border-radius:var(--radius-lg);
+  background:var(--ve-white);border-top:3px solid var(--ve-cyan);
+  transition:box-shadow .2s,transform .2s;
+}
+.feature-card:hover{box-shadow:var(--shadow);transform:translateY(-2px);}
+.feature-icon{font-size:1.4rem;margin-bottom:.7rem;}
+.feature-card h4{font-size:.82rem;font-weight:700;color:var(--ve-dark);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.4px;}
+.feature-card p{font-size:.8rem;color:var(--ve-mid);line-height:1.6;}
+.feature-card .ft{margin-top:.85rem;}
+.badge{display:inline-block;padding:.18rem .6rem;border-radius:2px;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px;}
+.badge-done{background:#d4f0d4;color:#2a6e2a;}
+.badge-progress{background:var(--ve-cyan-light);color:#006a80;}
+.badge-planned{background:#ebebeb;color:#555;}
+
+/* ── ROADMAP ────────────────────────────── */
+.roadmap-timeline{position:relative;max-width:820px;margin:0 auto;}
+.roadmap-timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--ve-border);transform:translateX(-50%);}
+.roadmap-item{display:flex;gap:2.5rem;margin-bottom:2.5rem;position:relative;}
+.roadmap-item:nth-child(even){flex-direction:row-reverse;}
+.roadmap-content{flex:1;padding:1.2rem 1.4rem;background:var(--ve-white);border:1px solid var(--ve-border);border-radius:var(--radius-lg);border-left:3px solid var(--ve-cyan);box-shadow:var(--shadow-sm);}
+.roadmap-item:nth-child(even) .roadmap-content{border-left:none;border-right:3px solid var(--ve-cyan);text-align:right;}
+.roadmap-dot{position:absolute;left:50%;top:1.2rem;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;z-index:1;border:3px solid var(--ve-white);}
+.rdot-done{background:var(--ve-cyan);box-shadow:0 0 0 2px var(--ve-cyan);}
+.rdot-current{background:var(--ve-dark);box-shadow:0 0 0 3px rgba(25,25,25,.2);animation:rpulse 2s infinite;}
+@keyframes rpulse{0%,100%{box-shadow:0 0 0 3px rgba(25,25,25,.15);}50%{box-shadow:0 0 0 7px rgba(25,25,25,.05);}}
+.rdot-upcoming{background:#ccc;box-shadow:0 0 0 2px #bbb;}
+.roadmap-spacer{flex:1;}
+.roadmap-content .rm-tag{margin-bottom:.4rem;}
+.roadmap-content h4{font-size:.82rem;font-weight:700;color:var(--ve-dark);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.4px;}
+.roadmap-content p{font-size:.8rem;color:var(--ve-mid);line-height:1.6;}
+.rm-date{font-size:.7rem;color:var(--ve-cyan-dark);margin-top:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+
+/* ── PLATFORM IN ACTION ─────────────────── */
+.videos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.video-card{background:var(--ve-white);border:1px solid var(--ve-border);border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow .2s,transform .2s;}
+.video-card:hover{box-shadow:var(--shadow);transform:translateY(-3px);}
+.video-thumb{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;}
+.video-thumb-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--ve-dark) 0%,#003550 100%);}
+.video-thumb-bg.v2{background:linear-gradient(135deg,#004a60 0%,var(--ve-cyan-dark) 100%);}
+.video-thumb-bg.v3{background:linear-gradient(135deg,#1a3a5c 0%,#2c6080 100%);}
+.thumb-icon{font-size:2.5rem;opacity:.25;}
+.play-btn{position:absolute;width:50px;height:50px;border-radius:50%;background:var(--ve-cyan);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(5,195,221,.45);transition:transform .2s,box-shadow .2s;}
+.video-card:hover .play-btn{transform:scale(1.1);box-shadow:0 6px 22px rgba(5,195,221,.55);}
+.play-btn::after{content:'';border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;}
+.video-duration{position:absolute;bottom:.5rem;right:.6rem;background:rgba(0,0,0,.6);color:#fff;font-size:.68rem;font-weight:700;padding:.15rem .45rem;border-radius:2px;}
+.vtag{position:absolute;top:.6rem;left:.6rem;background:var(--ve-cyan);color:#fff;font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:.15rem .5rem;border-radius:2px;}
+.vtag.v2{background:var(--ve-cyan-dark);}
+.vtag.v3{background:#2c4a6e;}
+.video-body{padding:1.1rem 1.25rem;}
+.video-body h4{font-size:.82rem;font-weight:700;color:var(--ve-dark);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.4px;}
+.video-body p{font-size:.78rem;color:var(--ve-mid);line-height:1.55;}
+.video-meta{display:flex;align-items:center;justify-content:space-between;margin-top:.75rem;}
+.video-rel{font-size:.68rem;color:var(--ve-cyan-dark);font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.video-watch-btn{font-size:.7rem;color:var(--ve-dark);font-weight:700;text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:.25rem;cursor:pointer;background:none;border:none;font-family:inherit;transition:color .15s;}
+.video-watch-btn:hover{color:var(--ve-cyan);}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(25,25,25,.88);z-index:2000;align-items:center;justify-content:center;padding:2rem;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#000;border-radius:var(--radius-lg);overflow:hidden;width:100%;max-width:820px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.modal-close{position:absolute;top:.75rem;right:.75rem;z-index:10;background:rgba(255,255,255,.15);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:background .15s;font-family:inherit;}
+.modal-close:hover{background:rgba(255,255,255,.3);}
+.modal-placeholder{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.85rem;background:linear-gradient(135deg,var(--ve-dark) 0%,#003550 100%);}
+.modal-placeholder strong{color:#fff;font-size:1rem;font-weight:700;}
+.modal-placeholder p{color:rgba(255,255,255,.5);font-size:.8rem;text-align:center;max-width:360px;}
+
+/* ── DOCS ───────────────────────────────── */
+.docs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;}
+.doc-card{padding:1.5rem;border:1px solid var(--ve-border);border-radius:var(--radius-lg);background:var(--ve-white);text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:.6rem;transition:all .2s;border-bottom:3px solid transparent;}
+.doc-card:hover{border-bottom-color:var(--ve-cyan);box-shadow:var(--shadow);transform:translateY(-2px);}
+.doc-icon{font-size:1.6rem;}
+.doc-card h4{font-size:.8rem;font-weight:700;color:var(--ve-dark);text-transform:uppercase;letter-spacing:.4px;}
+.doc-card p{font-size:.78rem;color:var(--ve-mid);flex:1;line-height:1.6;}
+.doc-link{font-size:.72rem;color:var(--ve-cyan-dark);font-weight:700;display:flex;align-items:center;gap:.25rem;text-transform:uppercase;letter-spacing:.4px;}
+
+/* ── CONTACT ────────────────────────────── */
+.contact-wrapper{display:grid;grid-template-columns:1fr 1.6fr;gap:3rem;max-width:960px;margin:0 auto;align-items:start;}
+.contact-info{display:flex;flex-direction:column;gap:1.4rem;}
+.contact-item{display:flex;gap:.9rem;align-items:flex-start;}
+.ci-icon{width:40px;height:40px;border-radius:var(--radius);background:var(--ve-cyan-light);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;border:1px solid rgba(5,195,221,.2);}
+.contact-item h4{font-size:.78rem;font-weight:700;color:var(--ve-dark);margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.4px;}
+.contact-item p{font-size:.8rem;color:var(--ve-mid);line-height:1.6;}
+.form-card{background:var(--ve-white);border:1px solid var(--ve-border);border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-group{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.9rem;}
+label{font-size:.7rem;font-weight:700;color:var(--ve-dark);text-transform:uppercase;letter-spacing:.5px;}
+input,select,textarea{
+  border:1.5px solid var(--ve-border);border-radius:var(--radius);
+  padding:.6rem .8rem;font-family:inherit;font-size:.85rem;
+  color:var(--ve-dark);background:var(--ve-white);transition:border-color .15s,box-shadow .15s;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ve-cyan);box-shadow:0 0 0 3px rgba(5,195,221,.12);}
+textarea{resize:vertical;min-height:110px;}
+.form-error{font-size:.7rem;color:#cc0000;margin-top:.15rem;font-weight:600;}
+.form-success{display:none;background:#d4f0d4;border:1px solid #a8d8a8;border-radius:var(--radius);padding:1.2rem;color:#2a6e2a;font-weight:600;text-align:center;margin-top:1rem;font-size:.85rem;}
+
+/* ── FOOTER ─────────────────────────────── */
+footer{background:var(--ve-dark);color:rgba(255,255,255,.6);padding:3.5rem 2rem 2rem;}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{display:flex;justify-content:space-between;gap:3rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.footer-brand{max-width:280px;}
+.footer-brand-logo{display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem;}
+.footer-brand p{font-size:.8rem;line-height:1.7;}
+.footer-accent-bar{width:30px;height:3px;background:var(--ve-cyan);margin-top:.9rem;}
+.footer-links h5{color:#fff;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.9rem;}
+.footer-links ul{list-style:none;display:flex;flex-direction:column;gap:.45rem;}
+.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;transition:color .15s;}
+.footer-links a:hover{color:var(--ve-cyan);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;}
+.footer-bottom p{font-size:.72rem;}
+.footer-bottom a{color:rgba(255,255,255,.4);text-decoration:none;font-size:.72rem;transition:color .15s;}
+.footer-bottom a:hover{color:var(--ve-cyan);}
+
+/* ── RESPONSIVE ─────────────────────────── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-right{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+}
+@media(max-width:768px){
+  .topbar{display:none;}
+  header{padding:0 1.25rem;}
+  nav{display:none;position:fixed;top:75px;left:0;right:0;background:var(--ve-white);border-bottom:2px solid var(--ve-cyan);flex-direction:column;padding:1rem;z-index:999;box-shadow:var(--shadow);}
+  nav.open{display:flex;}
+  nav a{width:100%;padding:.65rem 1rem;border-radius:var(--radius);}
+  nav a::after{display:none;}
+  .hamburger{display:flex;}
+  .sf-logo-wrap{display:none;}
+  #home{padding:90px 1.25rem 60px;}
+  #home h1{font-size:1.9rem;}
+  section{padding:56px 1.25rem;}
+  .roadmap-timeline::before{left:18px;}
+  .roadmap-item,.roadmap-item:nth-child(even){flex-direction:column;padding-left:2.75rem;}
+  .roadmap-item:nth-child(even) .roadmap-content{text-align:left;border-right:none;border-left:3px solid var(--ve-cyan);}
+  .roadmap-dot{left:18px;}
+  .roadmap-spacer{display:none;}
+  .contact-wrapper{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-top{flex-direction:column;gap:2rem;}
+  .hero-right{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOP BAR ──────────────────────────── -->
+<div class="topbar">
+  <a href="#docs">Documentation</a>
+  <span class="topbar-sep">|</span>
+  <a href="#contact">Support</a>
+  <span class="topbar-sep">|</span>
+  <a href="https://www.veolianorthamerica.com" target="_blank">veolianorthamerica.com ↗</a>
+</div>
+
+<!-- ── HEADER ───────────────────────────── -->
+<header id="top-header">
+
+  <div style="display:flex;align-items:center;gap:1.25rem;">
+    <!-- Veolia Logo -->
+    <a class="veolia-logo-wrap" href="#home">
+      <img src="Veolia_id0UuZgx2x_0.png" alt="Veolia North America" style="height:36px;width:auto;display:block;"/>
+    </a>
+
+    <!-- Salesforce logo + title -->
+    <div class="sf-logo-wrap">
+      <img src="https://www.salesforce.com/news/wp-content/uploads/sites/3/2021/05/Salesforce-logo.jpg" alt="Salesforce" style="height:32px;width:auto;display:block;"/>
+      <div style="display:flex;flex-direction:column;justify-content:center;">
+        <span style="font-size:.95rem;font-weight:800;color:var(--ve-dark);letter-spacing:.3px;line-height:1;">Salesforce Platform</span>
+        <span style="font-size:.65rem;font-weight:600;color:var(--ve-cyan-dark);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Veolia North America</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <nav id="main-nav">
+      <a href="#home" class="active" onclick="setActive(this)">Home</a>
+      <a href="#releases" onclick="setActive(this)">Releases</a>
+      <a href="#features" onclick="setActive(this)">Features</a>
+      <a href="#roadmap" onclick="setActive(this)">Roadmap</a>
+      <a href="#in-action" onclick="setActive(this)">Platform in Action</a>
+      <a href="#docs" onclick="setActive(this)">Docs</a>
+      <a href="#contact" class="nav-cta" onclick="setActive(this)">Contact Us</a>
+    </nav>
+    <div class="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ─────────────────────────────── -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag"><span class="dot"></span>Programme On Track · Release 1 Complete</div>
+      <h1>Salesforce Platform<br/><span>Transforming How<br/>We Work Together</span></h1>
+      <p class="hero-desc">The Salesforce Platform initiative delivers a unified CRM, automation, and analytics experience across Veolia — empowering teams to serve customers better and make smarter decisions.</p>
+      <div class="hero-actions">
+        <a href="#releases" class="btn btn-cyan">📅 View Releases</a>
+        <a href="#roadmap" class="btn btn-outline">🗺 See Roadmap</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hstat"><div class="hstat-icon">📦</div><div><div class="hstat-val">3</div><div class="hstat-lbl">Planned Releases</div></div></div>
+      <div class="hstat"><div class="hstat-icon">✅</div><div><div class="hstat-val">4</div><div class="hstat-lbl">Features Delivered</div></div></div>
+      <div class="hstat"><div class="hstat-icon">⭐</div><div><div class="hstat-val">12</div><div class="hstat-lbl">Total Features</div></div></div>
+      <div class="hstat"><div class="hstat-icon">🚀</div><div><div class="hstat-val" id="days-count">—</div><div class="hstat-lbl">Days to Go-Live</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RELEASE SCHEDULE ──────────────────── -->
+<section id="releases">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Release Schedule</div>
+      <h2>Planned Releases</h2>
+      <p>Three phased releases delivering incremental value — from Core CRM through advanced analytics and service capabilities.</p>
+    </div>
+    <div class="releases-grid">
+      <div class="release-card">
+        <div class="release-header r1">
+          <h3>Release 1 — Core CRM</h3>
+          <div class="rdate">📅 Delivered: May 14, 2026</div>
+          <div style="margin-top:.5rem;"><span class="tag tag-success">Released</span></div>
+        </div>
+        <div class="release-body">
+          <div class="release-meta"><span class="tag tag-neutral">v1.0</span><span class="tag tag-neutral">Foundation</span></div>
+          <div class="progress-bar"><div class="progress-fill pf-1" style="width:100%"></div></div>
+          <div class="progress-label"><span>Completion</span><span>100%</span></div>
+          <ul class="release-features">
+            <li>Account &amp; Contact Management</li>
+            <li>Opportunity Tracking &amp; Pipeline</li>
+            <li>Basic Reporting Suite</li>
+            <li>User Provisioning &amp; Roles</li>
+          </ul>
+        </div>
+      </div>
+      <div class="release-card">
+        <div class="release-header r2">
+          <h3>Release 2 — Sales Automation</h3>
+          <div class="rdate">📅 Target: June 27, 2026</div>
+          <div style="margin-top:.5rem;"><span class="tag tag-warn">In Progress</span></div>
+        </div>
+        <div class="release-body">
+          <div class="release-meta"><span class="tag tag-neutral">v2.0</span><span class="tag tag-neutral">Automation</span></div>
+          <div class="progress-bar"><div class="progress-fill pf-2" style="width:45%"></div></div>
+          <div class="progress-label"><span>Completion</span><span>45%</span></div>
+          <ul class="release-features">
+            <li>Lead Management &amp; Scoring</li>
+            <li>CPQ Integration</li>
+            <li class="planned">Email Automation Sequences</li>
+            <li class="planned">Sales Dashboards &amp; KPIs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="release-card">
+        <div class="release-header r3">
+          <h3>Release 3 — Service &amp; Analytics</h3>
+          <div class="rdate">📅 Target: August 8, 2026</div>
+          <div style="margin-top:.5rem;"><span class="tag tag-neutral">Planned</span></div>
+        </div>
+        <div class="release-body">
+          <div class="release-meta"><span class="tag tag-neutral">v3.0</span><span class="tag tag-neutral">Advanced</span></div>
+          <div class="progress-bar"><div class="progress-fill pf-3" style="width:0%"></div></div>
+          <div class="progress-label"><span>Completion</span><span>0%</span></div>
+          <ul class="release-features">
+            <li class="planned">Service Cloud &amp; Case Management</li>
+            <li class="planned">Knowledge Base</li>
+            <li class="planned">Einstein Analytics</li>
+            <li class="planned">Mobile App Enablement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ──────────────────────────── -->
+<section id="features">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Features</div>
+      <h2>What's in Each Release</h2>
+      <p>Explore the capabilities being delivered across all three releases of the Salesforce Platform.</p>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('r1f',this)">Release 1 — Core CRM</button>
+      <button class="tab-btn" onclick="showTab('r2f',this)">Release 2 — Sales Automation</button>
+      <button class="tab-btn" onclick="showTab('r3f',this)">Release 3 — Service &amp; Analytics</button>
+    </div>
+    <div id="r1f" class="tab-panel active">
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">🏢</div><h4>Account Management</h4><p>Create and manage business accounts with custom fields, hierarchies, and full activity timelines.</p><div class="ft"><span class="badge badge-done">Delivered</span></div></div>
+        <div class="feature-card"><div class="feature-icon">👤</div><h4>Contact Management</h4><p>Full contact lifecycle with roles, relationships, and comprehensive engagement history tracking.</p><div class="ft"><span class="badge badge-done">Delivered</span></div></div>
+        <div class="feature-card"><div class="feature-icon">💼</div><h4>Opportunity Tracking</h4><p>Pipeline management with stage tracking, forecasting, and close-date visibility for all teams.</p><div class="ft"><span class="badge badge-done">Delivered</span></div></div>
+        <div class="feature-card"><div class="feature-icon">📊</div><h4>Basic Reporting Suite</h4><p>Standard CRM reports covering pipeline summary, account activity, and win/loss analysis.</p><div class="ft"><span class="badge badge-done">Delivered</span></div></div>
+      </div>
+    </div>
+    <div id="r2f" class="tab-panel">
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">🎯</div><h4>Lead Management</h4><p>Lead capture, AI-powered scoring, routing rules, and conversion to Opportunity and Contact records.</p><div class="ft"><span class="badge badge-progress">In Progress</span></div></div>
+        <div class="feature-card"><div class="feature-icon">💰</div><h4>CPQ Integration</h4><p>Configure-Price-Quote integration for streamlined quote generation directly from Opportunities.</p><div class="ft"><span class="badge badge-progress">In Progress</span></div></div>
+        <div class="feature-card"><div class="feature-icon">📧</div><h4>Email Automation</h4><p>Automated follow-up sequences, templates, and engagement tracking via Salesforce Sales Engagement.</p><div class="ft"><span class="badge badge-planned">Planned</span></div></div>
+        <div class="feature-card"><div class="feature-icon">📈</div><h4>Sales Dashboards</h4><p>Executive and rep-level dashboards with KPIs, quota attainment, and real-time analytics.</p><div class="ft"><span class="badge badge-planned">Planned</span></div></div>
+      </div>
+    </div>
+    <div id="r3f" class="tab-panel">
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">🎧</div><h4>Service Cloud Cases</h4><p>Case management, SLA tracking, escalation rules, and omni-channel routing for service teams.</p><div class="ft"><span class="badge badge-planned">Planned</span></div></div>
+        <div class="feature-card"><div class="feature-icon">📚</div><h4>Knowledge Base</h4><p>Internal and customer-facing knowledge articles with versioning and intelligent search capability.</p><div class="ft"><span class="badge badge-planned">Planned</span></div></div>
+        <div class="feature-card"><div class="feature-icon">🤖</div><h4>Einstein Analytics</h4><p>AI-powered analytics, predictive scoring, next-best-action recommendations, and custom apps.</p><div class="ft"><span class="badge badge-planned">Planned</span></div></div>
+        <div class="feature-card"><div class="feature-icon">📱</div><h4>Mobile App Enablement</h4><p>Salesforce Mobile App configuration, offline access, and push notifications for field teams.</p><div class="ft"><span class="badge badge-planned">Planned</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ROADMAP ────────────────────────────── -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Roadmap</div>
+      <h2>Program Roadmap</h2>
+      <p>Key milestones from discovery through go-live and hypercare.</p>
+    </div>
+    <div class="roadmap-timeline">
+      <div class="roadmap-item">
+        <div class="roadmap-content"><div class="rm-tag"><span class="tag tag-success">Complete</span></div><h4>Discovery &amp; Planning</h4><p>Requirements gathering, stakeholder interviews, and solution architecture design.</p><div class="rm-date">Jan 6 – Feb 14, 2026</div></div>
+        <div class="roadmap-dot rdot-done"></div><div class="roadmap-spacer"></div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-spacer"></div><div class="roadmap-dot rdot-done"></div>
+        <div class="roadmap-content"><div class="rm-tag"><span class="tag tag-success">Complete</span></div><h4>Foundation Build</h4><p>Org setup, data model, user provisioning, and baseline Salesforce configuration.</p><div class="rm-date">Feb 17 – Mar 28, 2026</div></div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-content"><div class="rm-tag"><span class="tag tag-success">Complete</span></div><h4>Release 1 — Core CRM</h4><p>Accounts, Contacts, Opportunities, and baseline reporting delivered to all users.</p><div class="rm-date">Apr 1 – May 14, 2026</div></div>
+        <div class="roadmap-dot rdot-done"></div><div class="roadmap-spacer"></div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-spacer"></div><div class="roadmap-dot rdot-current"></div>
+        <div class="roadmap-content"><div class="rm-tag"><span class="tag tag-warn">In Progress</span></div><h4>Release 2 — Sales Automation</h4><p>Lead management, CPQ integration, email automation, and sales dashboards.</p><div class="rm-date">May 19 – Jun 27, 2026</div></div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-content"><div class="rm-tag"><span class="tag tag-neutral">Planned</span></div><h4>Release 3 — Service &amp; Analytics</h4><p>Service Cloud, Knowledge Base, Einstein Analytics, and mobile enablement.</p><div class="rm-date">Jun 30 – Aug 8, 2026</div></div>
+        <div class="roadmap-dot rdot-upcoming"></div><div class="roadmap-spacer"></div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-spacer"></div><div class="roadmap-dot rdot-upcoming"></div>
+        <div class="roadmap-content"><div class="rm-tag"><span class="tag tag-neutral">Planned</span></div><h4>UAT &amp; Training</h4><p>User acceptance testing, end-user training sessions, and knowledge base publication.</p><div class="rm-date">Aug 11 – Aug 29, 2026</div></div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-content"><div class="rm-tag"><span class="tag tag-info">Milestone</span></div><h4>🚀 Go-Live</h4><p>Full production cutover, hypercare support period, and post-launch program review.</p><div class="rm-date">September 1, 2026</div></div>
+        <div class="roadmap-dot rdot-upcoming"></div><div class="roadmap-spacer"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PLATFORM IN ACTION ─────────────────── -->
+<section id="in-action">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Platform in Action</div>
+      <h2>See It in Action</h2>
+      <p>Short video walkthroughs of key features across each release — see how the Salesforce Platform works for your team.</p>
+    </div>
+    <div class="videos-grid">
+      <div class="video-card">
+        <div class="video-thumb" onclick="openModal('Account &amp; Contact Management','Release 1 — Core CRM')">
+          <div class="video-thumb-bg"><span class="thumb-icon">🏢</span></div>
+          <span class="vtag">Release 1</span><div class="play-btn"></div><span class="video-duration">3:24</span>
+        </div>
+        <div class="video-body"><h4>Account &amp; Contact Management</h4><p>Create, manage, and navigate accounts and contacts with full activity timelines.</p>
+        <div class="video-meta"><span class="video-rel">Core CRM · v1.0</span><button class="video-watch-btn" onclick="openModal('Account &amp; Contact Management','Release 1')">▶ Watch</button></div></div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb" onclick="openModal('Opportunity Tracking &amp; Pipeline','Release 1 — Core CRM')">
+          <div class="video-thumb-bg"><span class="thumb-icon">💼</span></div>
+          <span class="vtag">Release 1</span><div class="play-btn"></div><span class="video-duration">4:10</span>
+        </div>
+        <div class="video-body"><h4>Opportunity Tracking &amp; Pipeline</h4><p>Manage your sales pipeline, update deal stages, and generate accurate forecasts.</p>
+        <div class="video-meta"><span class="video-rel">Core CRM · v1.0</span><button class="video-watch-btn" onclick="openModal('Opportunity Tracking &amp; Pipeline','Release 1')">▶ Watch</button></div></div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb" onclick="openModal('Lead Management &amp; Scoring','Release 2 — Sales Automation')">
+          <div class="video-thumb-bg v2"><span class="thumb-icon">🎯</span></div>
+          <span class="vtag v2">Release 2</span><div class="play-btn"></div><span class="video-duration">5:02</span>
+        </div>
+        <div class="video-body"><h4>Lead Management &amp; Scoring</h4><p>How leads are captured, AI-scored, routed to reps, and converted to opportunities.</p>
+        <div class="video-meta"><span class="video-rel">Sales Auto · v2.0</span><button class="video-watch-btn" onclick="openModal('Lead Management &amp; Scoring','Release 2')">▶ Watch</button></div></div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb" onclick="openModal('CPQ Integration','Release 2 — Sales Automation')">
+          <div class="video-thumb-bg v2"><span class="thumb-icon">💰</span></div>
+          <span class="vtag v2">Release 2</span><div class="play-btn"></div><span class="video-duration">6:15</span>
+        </div>
+        <div class="video-body"><h4>CPQ Integration</h4><p>Generate a Configure-Price-Quote directly from an Opportunity in Salesforce.</p>
+        <div class="video-meta"><span class="video-rel">Sales Auto · v2.0</span><button class="video-watch-btn" onclick="openModal('CPQ Integration','Release 2')">▶ Watch</button></div></div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb" onclick="openModal('Sales Dashboards &amp; KPIs','Release 2 — Sales Automation')">
+          <div class="video-thumb-bg v2"><span class="thumb-icon">📈</span></div>
+          <span class="vtag v2">Release 2</span><div class="play-btn"></div><span class="video-duration">3:48</span>
+        </div>
+        <div class="video-body"><h4>Sales Dashboards &amp; KPIs</h4><p>Real-time dashboards showing quota attainment, pipeline health, and team performance.</p>
+        <div class="video-meta"><span class="video-rel">Sales Auto · v2.0</span><button class="video-watch-btn" onclick="openModal('Sales Dashboards &amp; KPIs','Release 2')">▶ Watch</button></div></div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb" onclick="openModal('Einstein Analytics Overview','Release 3 — Service &amp; Analytics')">
+          <div class="video-thumb-bg v3"><span class="thumb-icon">🤖</span></div>
+          <span class="vtag v3">Release 3</span><div class="play-btn"></div><span class="video-duration">Coming Soon</span>
+        </div>
+        <div class="video-body"><h4>Einstein Analytics Overview</h4><p>AI-powered analytics, predictive scoring, and next-best-action recommendations preview.</p>
+        <div class="video-meta"><span class="video-rel">Analytics · v3.0</span><button class="video-watch-btn" onclick="openModal('Einstein Analytics Overview','Release 3')">▶ Watch</button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Modal -->
+<div class="modal-overlay" id="video-modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-placeholder">
+      <span style="font-size:3rem;opacity:.4;">▶</span>
+      <strong id="modal-title">Feature Video</strong>
+      <p id="modal-sub">Video coming soon — replace this placeholder with your hosted video URL.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── DOCUMENTATION ─────────────────────── -->
+<section id="docs">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Documentation</div>
+      <h2>Resources &amp; Documentation</h2>
+      <p>Everything you need to get started, get trained, and get support on the Salesforce Platform.</p>
+    </div>
+    <div class="docs-grid">
+      <a href="#" class="doc-card"><div class="doc-icon">📘</div><h4>User Guide</h4><p>Step-by-step guide covering all Salesforce features available to end users.</p><div class="doc-link">View Guide →</div></a>
+      <a href="#" class="doc-card"><div class="doc-icon">🎓</div><h4>Training Materials</h4><p>Role-based training decks, videos, and quick-reference cards for all teams.</p><div class="doc-link">Access Training →</div></a>
+      <a href="#" class="doc-card"><div class="doc-icon">🔧</div><h4>Admin Documentation</h4><p>Configuration guides, data model diagrams, integration specs, and admin runbooks.</p><div class="doc-link">View Docs →</div></a>
+      <a href="#" class="doc-card"><div class="doc-icon">📋</div><h4>Release Notes</h4><p>Detailed change logs and release notes for every version of the platform.</p><div class="doc-link">Read Notes →</div></a>
+      <a href="#" class="doc-card"><div class="doc-icon">❓</div><h4>FAQ</h4><p>Answers to the most frequently asked questions from end users and managers.</p><div class="doc-link">View FAQ →</div></a>
+      <a href="#" class="doc-card"><div class="doc-icon">🛟</div><h4>Support Portal</h4><p>Raise a support ticket, track an existing request, or escalate a critical issue.</p><div class="doc-link">Get Support →</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT & FEEDBACK ─────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Contact &amp; Feedback</div>
+      <h2>Get in Touch</h2>
+      <p>Have a question, feedback, or want to report an issue? The program team is here to help.</p>
+    </div>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <div class="contact-item"><div class="ci-icon">👤</div><div><h4>Program Manager</h4><p>Program-level questions, timelines, and escalations.</p></div></div>
+        <div class="contact-item"><div class="ci-icon">💻</div><div><h4>Technical Team</h4><p>Configuration, integration, or technical support queries.</p></div></div>
+        <div class="contact-item"><div class="ci-icon">🎓</div><div><h4>Change &amp; Training</h4><p>Training schedules, onboarding requests, and change management support.</p></div></div>
+        <div class="contact-item"><div class="ci-icon">🕐</div><div><h4>Response Time</h4><p>We aim to respond to all enquiries within 2 business days.</p></div></div>
+      </div>
+      <div class="form-card">
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group"><label for="c-name">Full Name *</label><input type="text" id="c-name" placeholder="Jane Smith"/><div class="form-error" id="err-name"></div></div>
+            <div class="form-group"><label for="c-team">Team / Department *</label><input type="text" id="c-team" placeholder="Sales Operations"/><div class="form-error" id="err-team"></div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="c-email">Email Address *</label><input type="email" id="c-email" placeholder="jane@veolia.com"/><div class="form-error" id="err-email"></div></div>
+            <div class="form-group"><label for="c-type">Type *</label>
+              <select id="c-type"><option value="">— Select —</option><option>General Enquiry</option><option>Bug Report</option><option>Enhancement Request</option><option>Training Request</option><option>Positive Feedback</option></select>
+              <div class="form-error" id="err-type"></div>
+            </div>
+          </div>
+          <div class="form-group"><label for="c-release">Related Release</label>
+            <select id="c-release"><option value="">— Optional —</option><option>Release 1 — Core CRM (v1.0)</option><option>Release 2 — Sales Automation (v2.0)</option><option>Release 3 — Service &amp; Analytics (v3.0)</option><option>General / Program-level</option></select>
+          </div>
+          <div class="form-group"><label for="c-msg">Message *</label><textarea id="c-msg" placeholder="Describe your enquiry or feedback..."></textarea><div class="form-error" id="err-msg"></div></div>
+          <button type="submit" class="btn btn-cyan" style="width:100%;justify-content:center;">Send Message</button>
+        </form>
+        <div class="form-success" id="form-success">✅ Thank you — your message has been received. We'll be in touch within 2 business days.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="Veolia_id0UuZgx2x_0.png" alt="Veolia" style="height:30px;width:auto;display:block;filter:brightness(0) invert(1);"/>
+        </div>
+        <p>Transforming how Veolia teams manage customers, automate processes, and make data-driven decisions — powered by Salesforce.</p>
+        <div class="footer-accent-bar"></div>
+      </div>
+      <div class="footer-links">
+        <h5>Programme</h5>
+        <ul>
+          <li><a href="#releases">Release Schedule</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
+          <li><a href="#in-action">Platform in Action</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="#docs">User Guide</a></li>
+          <li><a href="#docs">Training</a></li>
+          <li><a href="#docs">Release Notes</a></li>
+          <li><a href="#docs">Support Portal</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#contact">Submit Feedback</a></li>
+          <li><a href="#contact">Program Team</a></li>
+          <li><a href="#contact">Technical Support</a></li>
+          <li><a href="https://www.veolianorthamerica.com" target="_blank">veolianorthamerica.com ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Veolia North America — Salesforce Platform Programme. All rights reserved.</p>
+      <div style="display:flex;gap:1.5rem;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const d=Math.ceil((new Date('2026-09-01')-new Date().setHours(0,0,0,0))/86400000);
+    const el=document.getElementById('days-count');
+    el.textContent=d>0?d:d===0?'Today!':'Live';
+  })();
+  function setActive(el){document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));el.classList.add('active');document.getElementById('main-nav').classList.remove('open');}
+  function toggleNav(){document.getElementById('main-nav').classList.toggle('open');}
+  const sections=['home','releases','features','roadmap','in-action','docs','contact'];
+  window.addEventListener('scroll',()=>{
+    const y=window.scrollY+90;
+    sections.forEach(id=>{const el=document.getElementById(id);if(!el)return;if(y>=el.offsetTop&&y<el.offsetTop+el.offsetHeight){document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));const lnk=document.querySelector(`nav a[href="#${id}"]`);if(lnk)lnk.classList.add('active');}});
+  });
+  function showTab(id,btn){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+  function openModal(title,release){
+    document.getElementById('modal-title').textContent=title;
+    document.getElementById('modal-sub').textContent=release+' — Upload your video URL to replace this placeholder.';
+    document.getElementById('video-modal').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal(){document.getElementById('video-modal').classList.remove('open');document.body.style.overflow='';}
+  function closeModalOutside(e){if(e.target===document.getElementById('video-modal'))closeModal();}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+  document.getElementById('contact-form').addEventListener('submit',function(e){
+    e.preventDefault();let ok=true;
+    function chk(id,errId,test,msg){const v=document.getElementById(id).value.trim();const err=document.getElementById(errId);if(!test(v)){err.textContent=msg;ok=false;}else{err.textContent='';}}
+    chk('c-name','err-name',v=>v.length>1,'Please enter your name.');
+    chk('c-team','err-team',v=>v.length>1,'Please enter your team.');
+    chk('c-email','err-email',v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),'Please enter a valid email.');
+    chk('c-type','err-type',v=>v!='','Please select a type.');
+    chk('c-msg','err-msg',v=>v.length>=10,'Please enter at least 10 characters.');
+    if(ok){document.getElementById('contact-form').style.display='none';document.getElementById('form-success').style.display='block';}
+  });
+</script>
+</body>
+</html>
